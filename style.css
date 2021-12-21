@@ -1,0 +1,32 @@
+.ms_logo > img{
+    height: 75px;
+}
+.ms_logo > h1{
+    line-height: 1;
+    vertical-align: middle;
+}
+main{
+    background-color: #7FFFD4;
+}
+#minesweeper-grid{
+    width: 60%;
+    margin: 0 auto;
+
+}
+.ms_minesweeper-box-100,
+.ms_minesweeper-box-81,
+.ms_minesweeper-box-49{
+    border: 1px solid black;
+    width: 10%;
+    height: 75px;
+}
+.ms_minesweeper-box-81{
+    width: 11%;
+}
+.ms_minesweeper-box-49{
+    width: 13%;
+}
+.ms_select-box{
+    background-color: #6495ED;
+    color: white;
+}

@@ -1,17 +1,38 @@
-//funzione per far restituire solo il testo interno
-function cellaclick (){
-    const valorecella = parseInt(this.textContent);
-    this.classList.add("ms_select-box");
-    console.log(valorecella);
-}
+//Funzione che genera un array di 16 numeri che indica la posizione delle bombe
+function generatoreBombe ( difficolta ){
+    let arrayBombe = [];
 
+    while( arrayBombe.length < 16 ){
+        
+            let bomba = Math.floor( Math.random()*difficolta+1);
+
+            if ( !arrayBombe.includes( bomba ) ){
+                arrayBombe.push( bomba );
+            }
+    }
+    return arrayBombe
+} 
+ 
 // creo una funzione generica per far si che selezionando i box si colorino 
-function selettoreBox(elenco){
+function selettoreBox(elenco, difficolta){
+    let bombeGenerate = generatoreBombe(difficolta);
+    console.log(bombeGenerate);
+
     for (let i = 0; i < elenco.length; i++) {
         
-        elenco[i].addEventListener("click", cellaclick);
-    }   
-    
+        elenco[i].addEventListener("click", function(){
+
+            const valoreCella = parseInt(this.textContent);
+            console.log(valoreCella);
+            if(!bombeGenerate.includes(valoreCella)){
+                this.classList.add("ms_select-box");
+            }else{
+                this.classList.add("ms_bomb-box");
+
+            }
+        })
+    }
+
 }
 
 
@@ -35,6 +56,7 @@ pulsanteScelta.addEventListener("click", function(){
         
     }
     
+    
     //dichiaro dove voglio che questi box vengano creati
     const creaBox = document.getElementById("minesweeper-grid");
     creaBox.innerHTML = campoMinatoBox;
@@ -42,8 +64,10 @@ pulsanteScelta.addEventListener("click", function(){
     //creo un array che contenga tutti miei box selezionandoli per la classe
     let elencoBox = document.getElementsByClassName("ms_selector");
 
+    //faccio partire la funzione per generare le bombe
+
+
     //faccio partire la funzione per colorarle al click
-    selettoreBox(elencoBox);
+    selettoreBox(elencoBox, difficolta);
 
 });
-

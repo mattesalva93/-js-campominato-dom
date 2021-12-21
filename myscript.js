@@ -14,7 +14,7 @@ function generatoreBombe ( difficolta ){
 } 
  
 // creo una funzione generica per far si che selezionando i box si colorino 
-function selettoreBox(elenco, difficolta){
+function selettoreBox(elenco, difficolta, esito, scoreFinale){
     let bombeGenerate = generatoreBombe(difficolta);
     console.log(bombeGenerate);
     let contaClick = 0;
@@ -25,18 +25,16 @@ function selettoreBox(elenco, difficolta){
 
             const valoreCella = parseInt(this.textContent);
             console.log(valoreCella);
-            let scoreFinale = document.getElementById("defeat");
-            let esito = "";
             scoreFinale.innerHTML = esito;
             if(!bombeGenerate.includes(valoreCella)){
                 this.classList.add("ms_select-box");
                 contaClick++;
             }else{
-                    this.classList.add("ms_bomb-box");
-                    esito +=`
-                    <h3> Game Over! Score: ${contaClick} </h3>
-                    `
-                    scoreFinale.innerHTML = esito;
+                this.classList.add("ms_bomb-box");
+                esito +=`
+                <h3> Game Over! Score: ${contaClick} </h3>
+                `
+                scoreFinale.innerHTML = esito;
             }
             
         })
@@ -55,6 +53,9 @@ let pulsanteScelta = document.getElementById("levelchoice");
 pulsanteScelta.addEventListener("click", function(){
     let difficoltaScelta = document.getElementById("difficult");
     let difficolta = difficoltaScelta.value;
+    let scoreFinale = document.getElementById("defeat");
+    let esito = "";
+    scoreFinale.innerHTML = esito;
 
     //inserisco una griglia nell'html basandomi sul value della difficoltà cliccata
     let campoMinatoBox = "";
@@ -77,6 +78,6 @@ pulsanteScelta.addEventListener("click", function(){
     let elencoBox = document.getElementsByClassName("ms_selector");
 
     //faccio partire la funzione per colorarle al click
-    selettoreBox(elencoBox, difficolta);
+    selettoreBox(elencoBox, difficolta, esito, scoreFinale);
 
 });

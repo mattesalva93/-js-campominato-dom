@@ -14,9 +14,12 @@ function generatoreBombe ( difficolta ){
 } 
  
 // creo una funzione generica per far si che selezionando i box si colorino 
-function selettoreBox(elenco, difficolta){
+function selettoreBox(elenco, difficolta, creaBox){
     let bombeGenerate = generatoreBombe(difficolta);
     console.log(bombeGenerate);
+    let contaClick = 0;
+    let esito = document.getElementById("defeat");
+
 
     for (let i = 0; i < elenco.length; i++) {
         
@@ -26,9 +29,11 @@ function selettoreBox(elenco, difficolta){
             console.log(valoreCella);
             if(!bombeGenerate.includes(valoreCella)){
                 this.classList.add("ms_select-box");
+                contaClick++;
             }else{
                 this.classList.add("ms_bomb-box");
-
+                console.log(contaClick);
+                esito.innerHTML += "Game Over! Score:" + contaClick;
             }
         })
     }
@@ -64,10 +69,7 @@ pulsanteScelta.addEventListener("click", function(){
     //creo un array che contenga tutti miei box selezionandoli per la classe
     let elencoBox = document.getElementsByClassName("ms_selector");
 
-    //faccio partire la funzione per generare le bombe
-
-
     //faccio partire la funzione per colorarle al click
-    selettoreBox(elencoBox, difficolta);
+    selettoreBox(elencoBox, difficolta, creaBox);
 
 });
